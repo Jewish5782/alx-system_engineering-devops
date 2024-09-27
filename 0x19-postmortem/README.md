@@ -1,7 +1,7 @@
 0x19. Postmortem
 ================
 
-- By Felix Pronk
+- By Dev Nderitu
 - Weight: 1
 
 Concepts

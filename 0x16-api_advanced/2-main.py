@@ -10,7 +10,6 @@ if __name__ == '__main__':
         print("Please pass an argument for the subreddit to search.")
     else:
         result = recurse(sys.argv[1])
-        print(result)
         if result is not None:
             print(len(result))
         else:

@@ -1,23 +1,10 @@
 #!/usr/bin/env bash
-# Script to configure an Ubuntu server with requirements:
-# - localhost resolves to 127.0.0.2
-# - facebook.com resolves to 8.8.8.8
+# A script to change localhost addresses
 
-# Backup the current /etc/hosts file
-sudo cp /etc/hosts /etc/hosts.bak
-
-# Copy the current /etc/hosts to a temporary file for modification
-cp /etc/hosts ~/hosts.newfile
-
-# Append the new entries (without overwriting the whole file)
-echo "127.0.0.2    localhost" >> ~/hosts.newfile
-echo "8.8.8.8    facebook.com" >> ~/hosts.newfile
-
-# Overwrite the /etc/hosts file with the modified version
-sudo cp -f ~/hosts.newfile /etc/hosts
-
-# Optionally, remove the temporary file
-rm ~/hosts.newfile
-
-# Print the updated /etc/hosts for confirmation
-cat /etc/hosts
+# 1. Copy the existing hosts file to a new file called hosts.new
+# 2. Write the new IP address and hostname to the hosts.new file
+# 3. Copy the hosts.new file to the /etc/hosts file
+cp /etc/hosts ~/hosts.new
+echo "127.0.0.2 localhost" > ~/hosts.new
+echo "8.8.8.8  facebook.com" >> ~/hosts.new
+cp -f ~/hosts.new /etc/hosts
