@@ -1,15 +1,7 @@
 #!/usr/bin/env bash
-# configure nginx server
-
-# ssh into server
-#ssh -i ~/.ssh/id_rsa ubuntu@100.25.141.225
-
-sudo apt-get -y update
-sudo apt-get -y install nginx
-
-sudo ufw allow 80
-
-sudo chown -R "$USER":"$USER"  /var/www/html
-echo "Hello World!" > /var/www/html/index.nginx-debian.html
-
+# Script to setup an nginx server
+index_file=/var/www/html/index.nginx-debian.html
+sudo apt update
+sudo apt install nginx -y
+echo "Hello World!" > $index_file
 sudo service nginx restart

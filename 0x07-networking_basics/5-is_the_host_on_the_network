@@ -1,18 +1,7 @@
 #!/usr/bin/env bash
-#script to ping a network IP address
-
-count=1
-
-if [ "$#" -ne 1 ]; then
-	echo "Usage: 5-is_the_host_on_the_network {IP_ADDRESS}"
-	exit 1
+# This script
+if [ $# -gt 0 ]; then
+  ping "$1" -c 5
+else
+  echo "Usage: 5-is_the_host_on_the_network {IP_ADDRESS}"
 fi
-while [ $count -le 5 ]
-do
-	#ping -c 1 "$1" > /dev/null 2>&1
-	if ! ping -c 1 "$1"; then
-		echo "Failed to ping: No respones from $1"
-		exit 1
-	fi
-	((count++))
-done

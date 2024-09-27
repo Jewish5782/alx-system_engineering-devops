@@ -1,20 +1,26 @@
-index index.html index.htm index.nginx-debian.html;
-# 
-server_name ericogbekene.tech;
+server {
+        location /hbnb_static {alias /data/web_static/current/;index index.html;}
 
-location /hbnb_static {
-                # First attempt to serve request as file, then
-                
-                alias /data/web_static/current/;
+        add_header X-Served-By 392319-web-01;
+        listen 80 default_server;
+        listen [::]:80 default_server;
+
+        root /var/www/html;
+
+        index index.html index.htm index.nginx-debian.html;
+
+        server_name _;
+
+        location / {
+                try_files $uri $uri/ @404;
         }
 
-location /airbnb-onepage/ {
-
-                alias /web_flask/0-hello_route.py;
-                proxy_pass http://0.0.0.0:5000/airbnb-onepage/;
+        location /airbnb-onepage {
+                proxy_pass http://localhost:5000/airbnb-onepage;
                 proxy_redirect off;
-                proxy_set_header Host $host;
-                proxy_set_header X-Real-IP $remote_addr;
-
         }
 
+        location /redirect_me {return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;}
+
+        location @404 {return 404 "Ceci n'est pas une page\n";}
+}

@@ -1,29 +1,26 @@
 #!/usr/bin/python3
-"""Module to query reddit Api endpoint"""
+"""Script that queries the Reddit API and prints the titles of the first 10
+hot posts listed for a given subreddit."""
 
 import requests
 
 
 def top_ten(subreddit):
-    """
-    function to query reddit endpoint
-    """
+    """Prints the titles of the first 10 hot posts listed for a given
+    subreddit"""
+    url = f"https://www.reddit.com/r/{subreddit}/hot/.json"
+    headers = {"User-Agent": "My-User-Agent"}
+    params = {
+        "limit": 10
+    }
 
-    new_url = f'https://www.reddit.com/r/{subreddit}/hot.json'
-    headers = {'User-Agent': 'Eric O'}
-    param = {'limit': 10}
+    response = requests.get(url,
+                            headers=headers,
+                            params=params,
+                            allow_redirects=False)
 
-    try:
-        response = requests.get(new_url, headers=headers, params=param)
-        if response.status_code == 400:
-            return 0
-        # print("Data is : {}".format(response.json()['data']['children']))
-        data_response = response.json()['data']
-        for item in data_response['children']:
-            print(item['data']['title'])
-    except Exception as e:
-        print(e)
-
-
-if __name__ == '__main__':
-    top_ten(subreddit='programming')
+    if response.status_code >= 300:
+        print("None")
+    else:
+        [print(child.get("data").get("title"))
+         for child in response.json().get("data").get("children")]

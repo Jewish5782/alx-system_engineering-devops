@@ -1,12 +1,8 @@
 #!/usr/bin/env bash
-#display sript that prints to_infinity_and_beyond
-#with a sleep of 2s in between
-#recives a SIGTERM signal to display "I am invincible!!!"
-
-set=true
-
-while [ $set ]; do
-	echo "To infinity and beyond"
-	sleep 2
-	trap 'echo "I am invincible!!!"' TERM
+# This script
+trap 'echo "I am invincible!!!"' SIGTERM
+while :
+do
+    echo "To infinity and beyond"
+    sleep 2
 done

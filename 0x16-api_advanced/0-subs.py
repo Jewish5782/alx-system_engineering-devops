@@ -1,23 +1,20 @@
 #!/usr/bin/python3
-""" Module to query reddit Api endpoint"""
-
+"""Script that queries the Reddit API and returns the number of subscribers
+for a given subreddit."""
 import requests
 
 
 def number_of_subscribers(subreddit):
-    """
-    function to query reddit endpoint
-    """
+    """Returns the total number of subscribers for a given subreddit."""
+    url = f"https://www.reddit.com/r/{subreddit}/about.json"
+    headers = {"User-Agent": "My-User-Agent"}
 
-    new_url = f'https://www.reddit.com/r/{subreddit}/about.json'
-    headers = {'User-Agent': 'Eric O'}
-
-    try:
-        response = requests.get(new_url, headers=headers)
-        if response.status_code == 400:
-            return 0
-        # print("Data is : {}".format(response.json()))
-        count = response.json()['data']['subscribers']
-        return (count)
-    except Exception as e:
-        print(e)
+    response = requests.get(url,
+                            headers=headers,
+                            allow_redirects=False)
+    if response.status_code >= 300:
+        return 0
+    else:
+        data = response.json().get("data")
+        subscribers = data.get("subscribers")
+        return subscribers

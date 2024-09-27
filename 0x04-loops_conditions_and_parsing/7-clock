@@ -1,15 +1,11 @@
 #!/usr/bin/env bash
-#display the clock
-
-hour=0
-minutes=1
-
-while [ $hour -lt 13 ]; do
-	echo "Hour:" $hour
-	while [ $minutes -lt 60 ]; do
-		echo $minutes
-		((minutes++))
-	done
-	minutes=1
-	((hour++))
+# This script is displaying "Best School" 10 times
+hour=-1
+minute=1
+while ((hour++<12)); do
+    echo "Hour: $hour"
+    minute=0
+    while ((minute++<59)); do
+    echo $minute
+    done
 done

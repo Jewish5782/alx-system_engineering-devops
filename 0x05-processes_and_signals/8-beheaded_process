@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-#sript to kill a particular process
-# called 7-highlander
-
-pkill -SIGKILL -f "./7-highlander"
+# This script
+file_name="7-highlander"
+pids=$(pgrep -f "$file_name")
+if [ -n "$pids" ]; then
+  kill -9 "$pids"
+fi

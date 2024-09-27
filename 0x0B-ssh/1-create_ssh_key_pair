@@ -1,8 +1,4 @@
 #!/usr/bin/env bash
-# script to generate a key pair
+# script to generate an ssh private-public kery
 
-ssh-keygen -t rsa -b 4096 -f school -N betty -C "ericogbekene@icloud.com"
-
-
-#cp ~/.ssh/id_rsa ~/school/school
-#cp ~/.ssh/id_rsa.pub ~/school/school.pub
+< /dev/zero ssh-keygen -t rsa -b 4096 -f ./school -N "betty"

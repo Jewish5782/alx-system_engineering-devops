@@ -1,4 +1,3 @@
 #!/usr/bin/env bash
-#script to list all active processes
-
-ps -auxf
+# This script
+ps auxf

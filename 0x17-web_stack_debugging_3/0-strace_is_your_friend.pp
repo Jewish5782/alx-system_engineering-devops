@@ -1,8 +1,5 @@
-# fix server by replacing a line in a file on a server
-
-$file_to_edit = '/var/www/html/wp-settings.php'
-
-exec { 'replace_line':
-  command => "sed -i 's/phpp/php/g' ${file_to_edit}",
-  path    => ['/bin','/usr/bin']
+# this manifest corrects the php file extension in the WP settings file
+exec {'fix file extension':
+  path    => ['/usr/bin', '/usr/local/bin', '/bin', '/usr/sbin'],
+  command => "sed -i 's/phpp/php/g' /var/www/html/wp-settings.php"
 }
